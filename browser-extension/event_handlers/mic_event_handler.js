@@ -9,6 +9,10 @@ class MicEventHandler extends ToggleEventHandler {
   }
 
   handleStreamDeckEvent = (message) => {
+    if (!this.shouldExecute(message)) {
+      return;
+    }
+
     if (message.event === "muteMic") {
       this._setMuteState(true);
     } else if (message.event === "unmuteMic") {

@@ -34,4 +34,20 @@ class SDEventHandler {
    */
   onNewStreamDeckConnection = () => { }
 
+  getMeetId = () => 
+    window.location.pathname.replace(/^\//, '');
+
+  shouldExecute = (message) => {
+    const meetId = this.getMeetId();
+
+    if (message.settings?.whitelist) {
+      return message.settings.whitelist.split(',').some(entry => entry.trim() === meetId);
+    }
+
+    if (message.settings?.blacklist) {
+      return !message.settings.blacklist.split(',').some(entry => entry.trim() === meetId);
+    }
+
+    return true;
+  }
 }

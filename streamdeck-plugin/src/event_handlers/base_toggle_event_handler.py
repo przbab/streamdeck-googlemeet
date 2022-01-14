@@ -73,7 +73,7 @@ class BaseToggleEventHandler(EventHandler):
             and our `on_browser_event` will (asynchronously) update the button.
             """
             toggle_event = self._make_simple_sd_event(
-                self.BROWSER_TOGGLE_EVENT_TYPE)
+                self.BROWSER_TOGGLE_EVENT_TYPE, event.get('payload', {}).get('settings'))
             await self._browser_manager.send_to_clients(toggle_event)
         else:
             # No connected browser extensions, so there is no true state to show.
@@ -98,7 +98,7 @@ class BaseToggleEventHandler(EventHandler):
         # Request current mute state from the browser extension.
         # We'll asynchronously update button states when we get a response.
         await self._browser_manager.send_to_clients(
-            self._make_simple_sd_event(self.BROWSER_STATE_REQUEST_EVENT_TYPE))
+            self._make_simple_sd_event(self.BROWSER_STATE_REQUEST_EVENT_TYPE, event.get('payload', {}).get('settings')))
 
     async def _will_disappear_handler(self, event: dict) -> None:
         """

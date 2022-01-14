@@ -47,6 +47,10 @@ class PinPresentationEventHandler extends ToggleEventHandler {
   }
 
   handleStreamDeckEvent = (message) => {
+    if (!this.shouldExecute(message)) {
+      return;
+    }
+    
     if (message.event === "togglePinPresentation") {
       this._toggleMute();
     } else if (message.event === "getPinPresentationState") {

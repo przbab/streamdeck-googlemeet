@@ -10,5 +10,5 @@ class UnmuteMicEventHandler(EventHandler):
     STREAM_DECK_ACTION = "com.chrisregado.googlemeet.unmutemic"
 
     async def _key_up_handler(self, event: dict) -> None:
-        unmute = self._make_simple_sd_event("unmuteMic")
+        unmute = self._make_simple_sd_event("unmuteMic", event.get('payload', {}).get('settings'))
         await self._browser_manager.send_to_clients(unmute)

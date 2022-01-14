@@ -1,6 +1,10 @@
 class LeaveCallEventHandler extends SDEventHandler {
 
   handleStreamDeckEvent = (message) => {
+    if (!this.shouldExecute(message)) {
+      return;
+    }
+    
     if (message.event === "leaveCall") {
       this._leaveCall();
     }

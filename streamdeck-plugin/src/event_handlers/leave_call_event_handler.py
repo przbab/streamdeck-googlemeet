@@ -9,5 +9,5 @@ class LeaveCallEventHandler(EventHandler):
     STREAM_DECK_ACTION = "com.chrisregado.googlemeet.leavecall"
 
     async def _key_up_handler(self, event: dict) -> None:
-        leave = self._make_simple_sd_event("leaveCall")
+        leave = self._make_simple_sd_event("leaveCall", event.get('payload', {}).get('settings'))
         await self._browser_manager.send_to_clients(leave)

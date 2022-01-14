@@ -9,5 +9,5 @@ class ChatToggleEventHandler(EventHandler):
     STREAM_DECK_ACTION = "com.chrisregado.googlemeet.togglechat"
 
     async def _key_up_handler(self, event: dict) -> None:
-        chat = self._make_simple_sd_event("toggleChat")
+        chat = self._make_simple_sd_event("toggleChat", event.get('payload', {}).get('settings'))
         await self._browser_manager.send_to_clients(chat)

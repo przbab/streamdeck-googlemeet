@@ -10,5 +10,5 @@ class TurnOffCameraEventHandler(EventHandler):
     STREAM_DECK_ACTION = "com.chrisregado.googlemeet.disablecamera"
 
     async def _key_up_handler(self, event: dict) -> None:
-        disable = self._make_simple_sd_event("disableCamera")
+        disable = self._make_simple_sd_event("disableCamera", event.get('payload', {}).get('settings'))
         await self._browser_manager.send_to_clients(disable)

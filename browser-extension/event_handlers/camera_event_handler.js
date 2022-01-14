@@ -9,6 +9,10 @@ class CameraEventHandler extends ToggleEventHandler {
   }
 
   handleStreamDeckEvent = (message) => {
+    if (!this.shouldExecute(message)) {
+      return;
+    }
+    
     if (message.event === "disableCamera") {
       this._setMuteState(true);
     } else if (message.event === "enableCamera") {

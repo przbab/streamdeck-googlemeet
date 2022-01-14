@@ -65,6 +65,10 @@ class HandEventHandler extends ToggleEventHandler {
   }
 
   handleStreamDeckEvent = (message) => {
+    if (!this.shouldExecute(message)) {
+      return;
+    }
+    
     if (message.event === "toggleHand") {
       this._toggleMute();
     } else if (message.event === "getHandState") {

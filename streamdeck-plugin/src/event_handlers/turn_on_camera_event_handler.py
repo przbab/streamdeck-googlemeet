@@ -10,5 +10,5 @@ class TurnOnCameraEventHandler(EventHandler):
     STREAM_DECK_ACTION = "com.chrisregado.googlemeet.enablecamera"
 
     async def _key_up_handler(self, event: dict) -> None:
-        enable = self._make_simple_sd_event("enableCamera")
+        enable = self._make_simple_sd_event("enableCamera", event.get('payload', {}).get('settings'))
         await self._browser_manager.send_to_clients(enable)
